@@ -1,5 +1,6 @@
 package com.example.superhero
 
+import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_superheroes.view.*
 
 class MySuperheroesRecyclerViewAdapter(
     private val mContext: MainActivity,
+    private val fragmentManager: FragmentManager,
     private val mValues: ArrayList<HashMap<String, Any>>
 
 ) : RecyclerView.Adapter<MySuperheroesRecyclerViewAdapter.ViewHolder>() {
@@ -47,6 +49,7 @@ class MySuperheroesRecyclerViewAdapter(
         Glide.with(mContext).load(item["image"]).into(holder.mImage)
 
 
+
         holder.mView.setOnClickListener {
             Toast.makeText(mContext, item["name"].toString(), Toast.LENGTH_LONG).show()
 //            Log.e("Test", item["name"].toString() )
@@ -54,6 +57,10 @@ class MySuperheroesRecyclerViewAdapter(
 //           Toast.makeText(mContext, item["name"].toString(), Toast.LENGTH_LONG).show()
 
 
+        }
+        holder.mView.setOnClickListener {
+            val bottomSheetFragment = ItemDialogFragment.newInstance(item["name"].toString(), item["power"].toString(), item["gender"].toString(), item["image"].toString().toInt())
+            bottomSheetFragment.show(fragmentManager, "")
         }
     }
 

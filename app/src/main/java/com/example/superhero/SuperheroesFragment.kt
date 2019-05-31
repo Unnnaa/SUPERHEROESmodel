@@ -53,7 +53,7 @@ class SuperheroesFragment : Fragment() {
         if (view is RecyclerView) {
             with(view) {
                 layoutManager = LinearLayoutManager(context)
-                adapter = MySuperheroesRecyclerViewAdapter(activity as MainActivity, superheroes)
+                adapter = MySuperheroesRecyclerViewAdapter(activity as MainActivity, fragmentManager!!, superheroes)
             }
         }
         return view
